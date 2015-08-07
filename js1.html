@@ -1,0 +1,761 @@
+<html>
+  <head>
+
+<script>
+
+function assert(condition, message) {
+    if (!condition) {
+        message = message || "Assertion failed";
+        if (typeof Error !== "undefined") {
+	    alert("Assertion Failed");
+            throw new Error(message);
+        }
+        alert("Assertion Failed!");
+        throw message; // Fallback
+    }
+}
+
+
+function compare_arrays(arrayA,arrayB)
+{
+    // if the other array is a falsy value, return
+    if (!arrayA || !arrayB)
+        return false;
+
+    // compare lengths - can save a lot of time 
+    if (arrayA.length != arrayB.length)
+        return false;
+
+    for (var i = 0, l=arrayA.length; i < l; i++) {
+        // Check if we have nested arrays
+        if (arrayA[i] instanceof Array && array[i] instanceof Array) {
+            // recurse into the nested arrays
+            if (!arrayA[i].equals(arrayB[i]))
+                return false;       
+        }           
+        else if (arrayA[i] != arrayB[i]) { 
+            // Warning - two different object instances will never be equal: {x:20} != {x:20}
+            return false;   
+        }           
+    }       
+    return true;
+}   
+
+
+function init()
+{
+    console.log("init function");
+  
+   // uncomment each line one at a time
+   // variables();
+ 
+   // strings();
+
+   // numbers();
+
+   // booleans();
+
+   // arrays();
+
+   // objects();
+
+   // maths();
+
+   // funcs();
+
+   loops();
+
+   // advanced();
+
+
+}
+
+function variables()
+{
+    console.log("variables");
+
+    //create a new variable and assign the value 6 to it
+    var r = 6;
+    assert(r == 6);
+    assert(typeof r == "number");
+
+    //create a new floating point number with value of 1.0
+    
+    var r = 1
+    assert(r == 1.0);
+    assert(r == 1); //why does this work?
+    
+    //create a new string
+
+    r  = "JavaScript";
+    assert(r == "JavaScript");
+
+    //create a new boolean
+
+    r = true
+    assert(r == true);
+
+    //create a new var b that is undefined
+
+    var b;
+    assert(b == undefined);
+    
+    alert("Good Job");
+
+}
+
+function numbers()
+{
+
+    console.log("numbers");
+    //use the ++ operator to increment 
+
+    var a = 5;
+
+    a++
+    assert(a == 6);
+
+    //use the -- operator to decrement
+
+    a--
+    assert(a == 5);
+
+    //use .toString() to convert a number to a string
+
+    var a = 10.9;
+    
+    r = a.toString()
+    assert(r == "10.9");
+
+    //use parseInt() to convert a string to an integer
+
+    var a = "10.0";
+
+    r = parseInt(a);
+    assert(r == 10);
+
+    //use parseFloat()
+    var a = "10.9";
+    r = parseFloat(a)
+    assert(r == 10.9);
+
+    alert("Getting there!");
+
+}
+
+
+function maths()
+{
+    console.log("maths");
+
+    //Math object is used to do the maths
+
+    //Ex:
+    var squareOfTwo = Math.pow(2,2);
+
+    var randomNumber = Math.random();
+
+    //use the Math.min object to get the minium of a and b
+
+    var a = 24;
+    var b = 6;
+    var r = Math.min(a,b);
+    assert(r == 6);
+
+    //find the max with Math.max
+
+    r = Math.max(a,b);
+    assert(r == 24);
+    //use Math.floor to round down to an integer
+
+    var a = 1.3;
+
+    r = Math.floor(a)
+    assert(r == 1);
+
+    //use Math.ceil to round up
+
+    var a = 1.9;
+
+    r = Math.ceil(a);
+    assert(r == 2);
+
+    alert("The maths for the win");
+
+}
+
+function booleans()
+{
+
+    console.log("booleans");
+
+    //use the == operator to see if a has the same value as b
+    var a = 5;
+    var b = 5;
+
+    r = (a == b)
+    assert(r == true);
+
+    //use the == operator to see if a is not equal to b
+    var b = 6;
+    r = (a == b)
+    assert(r == false);
+
+    //use the != operator to show that a and b are not equal
+    r = (a != b)
+    assert(r == true);
+
+    //use the && operator to assert that a == 5 AND b == 6
+    r = (a ==5 && b ==6)
+    assert(r == true);
+
+    //use the || operator to assert that a or b is equal to 5
+
+    r = (a == 5 || b == 5)
+    assert(r == true);
+
+    alert("You now know things about booleans in JS");
+
+}
+
+function strings()
+{
+    console.log("strings");
+
+    //use the length property/attribute of a to get the length and set it to r
+    var a = "JavaScript strings";
+    r = a.length
+    assert(r == 18);
+
+    //join a and b
+    a = "Hello ";
+    b = "Earth";
+    r = a + b
+    assert(r == "Hello Earth");
+
+    //Get the first character of a string
+    var a = "Why?";
+    r = a[0]
+    assert(r == "W");
+
+    //use the method indexOf to find the substring "find"
+
+    var a = "Can you find the word?"
+    r = a.indexOf("find")
+    assert(r == 8);
+
+    //use .replace to replace world with sandwich
+    var a = "hello, world";
+
+    r = a.replace("world", "sandwich")
+    assert(r == "hello, sandwich");
+
+    //use .toUpperCase to yell
+
+    var a = "hello";
+    r = a.toUpperCase()
+    assert(r == "HELLO");
+
+    assert("5" == 5); //why does this work?
+
+    alert("This is a string, here is another: good job");
+
+}
+
+function arrays()
+{
+
+    console.log("arrays");
+    //create a new array 
+
+    r = [1,3]
+    assert(r instanceof Array );
+
+    //create an array with three numbers
+
+    r = [2,4,6]
+    assert(r.length == 3);
+
+    
+    //get the second element out of this array
+
+    var a = ["One","Two","Three"];
+    
+    r = a[1];
+    assert(r == "Two");
+
+
+    //add an element to the array
+    var a = [1,2,3,4];
+
+    a[4] = 5
+    assert(a.length == 5);
+    
+    
+    //slice an array
+
+    var a = [1,2,3,4];
+
+    r = a.slice(1,3);
+    assert(compare_arrays(r,[2,3]));
+    
+
+    //remove an element from an array using the splice method
+    var a = ["One","Two","Three"];
+
+    a.splice(1,1);
+
+    assert(compare_arrays(a,["One","Three"]));
+
+    //use the .join() method to convert an array to a string
+    var a = ['a','b','c','d'];
+    
+    r = a.join()
+    assert(r == "a,b,c,d");
+    
+
+    alert("Store all the things!");
+
+}
+
+function objects()
+{
+
+    console.log("Objects");
+    //create a new object with two properties color and type
+
+    var a = {};
+    a = {color:"red", type:"string"};
+    assert(a.hasOwnProperty('color'));
+    assert(a.hasOwnProperty('type'));
+
+
+    //create a new object with properties value and suit
+    //value = 10
+    //suit = "Ace"
+
+    var a = {};
+    a = {value:10, suit:"Ace"}
+    assert(a.value == 10);
+    assert(a.suit == "Ace");
+    
+    //change a value property to 9
+
+    a.value = 9
+    assert(a.value == 9);
+
+    alert("Objective completed");
+}
+
+function funcs()
+{
+
+    console.log("Functions");
+
+    var add = function (a,b) 
+    {
+	return a + b;
+    }
+
+    add(1,2);
+
+
+    //create an anonymous function, and assign it oneUp
+    //this function adds one to its argument
+
+    var oneUp = function (a) {return a+1;}
+
+    assert(oneUp(5) == 6);
+
+
+    //lets create a dog object with properties and methods.
+
+    //fix the assert to check that dog has a name spot
+    var dog = {name:"Spot", get_name: function() {return this.name;}, speak: function() {return "Woof"}}
+    
+    assert(dog.get_name() == "Spot");
+
+
+    //fix the assert to make sure the dog says Woof
+    
+
+    assert(dog.speak() == "Woof");
+
+    alert("Making functions");
+
+}
+
+function loops()
+{
+
+    //for - write a for loop that prints 1 to 10 in the console.log
+    for(i=1;i<11; i++){console.log(i)};
+
+    //write a while loop to do the same
+    i = 1
+    while(i<11){console.log(i); i++};
+
+    //use a do..while to do the same
+    i =1
+    do {console.log(i); i++} while(i <11);
+
+    //use a for loop to print all the array elements
+
+    var a = ["One","Two","Three"];
+
+    for(;a[i];){console.log(a[i]); i++}
+
+
+    //use for in to loop through all the properties of an object
+    var budget_item = {name:"rent",amount:2000.0}
+
+    for(var prop in budget_item){console.log(prop)}
+
+
+    
+    //use for in to loop through and print all the properties values in budget_item
+
+    for(var prop in budget_item){console.log(prop + ": " + budget_item[prop])}
+
+    //sum an array three ways for,while, recursion 
+
+    var sum_array = [1,9,7,9,7];
+    var sum = 0;
+    //sum with a for loop
+    for(var i=0; i<sum_array.length; i++) {sum = sum + sum_array[i];}
+    r = sum     
+    
+
+    assert(r == 33);
+    r = 5
+    //sum with a while loop
+    sum = 0
+
+    while(i=0; i<5) {sum = sum + sum_array[i]; i++}
+
+    assert(r == 33);
+
+    //sum with a recursive function
+
+
+    assert(r == array_sum(sum_array));
+
+}
+
+
+function advanced()
+{
+
+    //flatten a nested array
+    
+    var a = [[1,2,3],[4,5,6]];
+
+
+    merged = [];
+    merged = merged.concat.apply(merged, a);
+    r = merged
+
+    assert(compare_arrays(r, [1,2,3,4,5,6]));
+
+
+    
+
+}
+
+</script>
+
+</head>
+<body onload="init();">
+
+<h1> JavaScript </h1>
+
+<p>Welcome to the first Javascript tutorial.  Here you will be guided through the basic syntax of javascript.  The exercises will be conducted in your Chrome browser console.  Comment out one assert statement at a time, starting on line 50, and finish that section before moving on.</p>
+
+
+<h1> References:
+</h1>
+
+<a href='http://www.w3schools.com/jsref/default.asp'>W3Schools JavaScript Reference</a>
+
+<p>Refer to this document for tips on how to complete this exercise</p>
+
+<h1>
+Comments in JavaScript:
+</h1>
+
+</br>
+Single line comments: //
+</br>
+Multi-line comments: /* comments */
+</br>
+</br>
+
+<h1>
+Basic syntax
+</h1>
+
+In Javascript each line ends with a ; 
+</br>
+a + b;
+
+<h1>
+Variables:
+</h1>
+</br>
+Variables are declared in javascript with the var keyword
+</br>
+var r = 3;
+</br>
+If you declare a variable without a value, its value will be undefined.
+</br>
+var r; //undefinded
+</br>
+<!-- <a href="http://www.w3schools.com/js/js_variables.asp
+">String Reference</a>
+http://www.w3schools.com/js/js_variables.asp
+ -->
+<h1>
+Numbers in JavaScript:
+</h1>
+
+There is only one number type. 
+</br>
+Integers, floats, and numbers in expotentional notion are the
+same type.
+</br>
+1</br>
+1.0</br>
+5.6</br>
+1e2 </br>
+
+</br>
+<!-- <a href="http://www.w3schools.com/jsref/jsref_obj_number.asp
+">String Reference</a>
+
+ -->
+<h1>
+Strings:
+</h1>
+A string is a literal that is wrapped in single or double quotes.
+
+</br>
+
+"cat"
+</br>
+'cat'
+</br>
+
+<!-- <a href="http://www.w3schools.com/jsref/jsref_obj_string.asp">String Reference</a>
+ -->
+<h1>
+Boolean:
+</h1>
+
+true </br>
+false
+</br>
+False Values:
+false, 0, the empty string (""), NaN, null, and undefined all become false.
+</br>
+<!-- <a href="http://www.w3schools.com/jsref/jsref_obj_boolean.asp">Boolean Reference</a>
+ -->
+<h1>
+null 
+</h1>
+
+Is a primitive data type, saying that something has no value.
+
+<h1>
+undefined
+</h1>
+
+Another primitive used to specify something is undefined. </br></br>
+
+Null is still a value, where if something is undefined JavaScript has never seen it yet.
+</br>
+var A; //undefined
+</br>
+var A = null; //A has a value now, that value is null.
+</br>
+
+<h1>Arrays</h1>
+
+JavaScript has a builtin array object.
+
+var a = [1,2,3];
+
+<!-- <a href="http://www.w3schools.com/jsref/jsref_obj_array.asp">Arrays</a>
+ -->
+<h1>
+Objects:
+</h1>
+
+Objects are collections of key/value pairs. </br>
+
+var person = {firstName:"John", lastName:"Doe", age:50, eyeColor:"blue"};</br>
+
+<!-- <a href="http://www.w3schools.com/js/js_objects.asp">Object Reference</a>
+ -->
+</br>
+
+<h1>Operators</h1>
+
+JS operators are +, -, *, / and % - modulo/remainder. 
+</br>
+Assignment using =, and += and -=.
+</br>
+
+Conditional (Ternary) Operator
+
+var rideMessage = (height < 5) ? "Too short" : "Tall enough";
+
+<h1>Control Structures</h1>
+
+if/else if/else statments
+
+if (value == otherValue) { </br>
+//stuff </br>
+} else if (value == anotherValue) { </br>
+//do stuff </br>
+}</br> 
+else {</br> 
+//other stuff</br>
+}
+
+Short Circuit Evaluation: </br>
+
+if (funcA() && funcB()) </br>
+
+In the if above, if the call to funcA returns false then funcB is never called. </br>
+This can be useful behavior, but be careful with it because easy to create bugs.
+
+</br>
+
+<h1>
+Functions:
+</h1>
+
+Functions in JavaScript are just objects and can be used like any other JS value.
+</br>
+They can be stored in variables, objects, and arrays.
+
+</br>
+
+Functions are created using the function keyword.
+</br>
+var add = function (a,b) 
+{
+    return a + b;
+}
+</br>
+add(1,2);</br>
+
+Functions are objects, and have methods.
+
+<h1>Loops:
+</h1>
+
+JavaScript has four looping contructs: </br>
+
+
+</br>
+<!-- <a href="http://www.w3schools.com/jsref/jsref_for.asp">For loop</a></br>
+
+<a href="http://www.w3schools.com/jsref/jsref_while.asp">While Loops</a></br>
+
+<a href="http://www.w3schools.com/jsref/jsref_dowhile.asp">Do While</a></br>
+
+<a href="http://www.w3schools.com/jsref/jsref_forin.asp">For In</a></br>
+ -->
+<h1>Math</h1>
+
+More advanced math functions are done using the Math object.
+</br>
+
+<!-- <a href="http://www.w3schools.com/jsref/jsref_obj_math.asp">Math Object Reference</a> -->
+
+<h1>Date</h1>
+
+Date object with date related methods.</br>
+
+<!-- <a href="http://www.w3schools.com/jsref/jsref_obj_date.asp">Date Object Reference</a> -->
+
+<h1> Regular Expressions </h1>
+
+Regular Expression Objects</br>
+
+<!-- <a href="http://www.w3schools.com/jsref/jsref_obj_regexp.asp">RegExp Object Reference</a> -->
+
+
+<h1>Closures:</h1>
+
+Closure is a function that returns another function, by doing so though myFunc's state or 
+variables are in enclosed with the new function.
+</br></br>
+function makeAdder(x) { </br>
+  return function(y) { </br>
+    return x + y; </br>
+  }; </br>
+} </br>
+
+
+var add5 = makeAdder(5); </br>
+var add10 = makeAdder(10); </br>
+
+console.log(add5(2));  // 7 </br>
+console.log(add10(2)); // 12 </br>
+
+<!-- <a href="http://www.w3schools.com/js/js_function_closures.asp">Closure Reference</a></br>
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures">Closure Reading</a>
+
+ -->
+
+<h1> Caveats </h1>
+
+Numbers are all stored as 64-bit floats. </br>
+
+0.1 + 0.2 == 0.30000000000000004 </br>
+
+</br>
+JavaScript will try to convert before testing values </br>
+
+"5" == 5 </br>
+true </br>
+
+Also </br>
+
+"5" + 5 </br>
+"55" </br>
+
+If you don't want that you need to use === </br>
+</br>
+Arrays can have holes </br>
+
+var a = [1,2,3]; </br>
+
+a[100] = 4; //this works  </br>
+a.length; //101 </br>
+</br>
+the holes will be set to undefined
+</br>
+</br>
+For in doesn't guarantee order, so best not used on Arrays
+</br>
+</br>
+typeof does not distinguish between arrays and objects
+</br>
+</br>
+NaN - Not a number </br>
++ "5" </br>
+5 </br>
+
++ 'wow'</br>
+NaN</br>
+
+Also NaN is not equal to itself</br>
+
+NaN === NaN</br>
+false</br>
+
+</body>
+</html>
